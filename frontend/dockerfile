@@ -1,14 +1,11 @@
-# Use uma imagem base adequada para sua aplicação (exemplo: Node.js)
-FROM node:14
+# Use a imagem base do Nginx
+FROM nginx:latest
 
-WORKDIR /app
+# Copie o arquivo HTML para o diretório de publicação do Nginx
+COPY index.html /usr/share/nginx/html
 
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
+# Exponha a porta 80
 EXPOSE 80
 
-CMD ["npm", "start"]
+# Inicie o servidor Nginx em primeiro plano
+CMD ["nginx", "-g", "daemon off;"]

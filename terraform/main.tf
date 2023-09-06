@@ -12,8 +12,11 @@ provider "docker" {
 }
 
 resource "docker_container" "frontend" {
-  name  = "frontend-app"
-  image = "my-frontend-app:0.1.1"
+  name  = "frontend"
+  image = "my-frontend-app"
+
+  restart = "always"
+
   ports {
     internal = 80
     external = 8080
@@ -21,10 +24,56 @@ resource "docker_container" "frontend" {
 }
 
 resource "docker_container" "backend" {
-  name  = "backend-app"
-  image = "my-backend-app:0.1.1"
+  name  = "backend"
+  image = "my-backend-app"
+
+  restart = "always"
+
   ports {
     internal = 3000
     external = 3000
   }
+
+  env = [
+    "PORT=3000",
+    "POSTGRES_USER=${var.POSTGRES_USER}",
+    "POSTGRES_PASSWORD=${var.POSTGRES_PW}",
+    "POSTGRES_DB=${var.POSTGRES_DB}",
+  ]
+
+  depends_on = [docker_container.postgres]
+}
+
+resource "docker_container" "postgres" {
+  name  = "postgres"
+  image = "postgres:15.4"
+
+  restart = "always"
+  ports {
+    internal = 5432
+    external = 5432
+  }
+
+  env = [
+    "POSTGRES_USER=${var.POSTGRES_USER}",
+    "POSTGRES_PASSWORD=${var.POSTGRES_PW}",
+    "POSTGRES_DB=${var.POSTGRES_DB}",
+  ]
+}
+
+resource "docker_container" "pgadmin" {
+  name  = "pgadmin"
+  image = "dpage/pgadmin4:latest"
+
+  restart = "always"
+
+  ports {
+    internal = 80
+    external = 5050
+  }
+
+  env = [
+    "PGADMIN_DEFAULT_EMAIL=${var.PGADMIN_MAIL}",
+    "PGADMIN_DEFAULT_PASSWORD=${var.PGADMIN_PW}",
+  ]
 }
