@@ -1,0 +1,4 @@
+.git
+.cache
+web/node_modules
+web/*.log
