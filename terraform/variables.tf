@@ -8,7 +8,7 @@ variable "POSTGRES_DB" {
   default = "postgres" # Valor padrão para POSTGRES_DB
 }
 variable "PGADMIN_MAIL" {
-  default = "marciothadeu1984@gmail.com" # Valor padrão para PGADMIN_MAIL
+  default = "mtguimaraes84@gmail.com" # Valor padrão para PGADMIN_MAIL
 }
 variable "PGADMIN_PW" {
   default = "canes123" # Valor padrão para PGADMIN_PW

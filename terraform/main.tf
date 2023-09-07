@@ -13,7 +13,7 @@ provider "docker" {
 
 resource "docker_container" "frontend" {
   name  = "frontend"
-  image = "my-frontend-app"
+  image = "my-frontend-app:v1"
 
   restart = "always"
 
@@ -25,7 +25,7 @@ resource "docker_container" "frontend" {
 
 resource "docker_container" "backend" {
   name  = "backend"
-  image = "my-backend-app"
+  image = "my-backend-app:v1"
 
   restart = "always"
 

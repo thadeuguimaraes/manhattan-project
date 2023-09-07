@@ -74,16 +74,17 @@ docker-compose up -d
 Isso instruirá o Docker Compose a construir e iniciar os contêineres definidos no arquivo docker-compose.yml. O uso da opção -d faz com que os contêineres sejam executados em segundo plano.
 
 Aguarde até que todos os contêineres estejam prontos. Você pode verificar o status dos contêineres com o comando:
+```bash
+docker-compose ps
+```
 Uma vez que todos os contêineres estejam em execução, sua aplicação estará acessível localmente.
 
 Lembre-se de que é importante ter o Docker e o Docker Compose instalados no seu sistema antes de executar esses comandos.
 
 Agora você deve ter sua aplicação executando localmente com Docker e Docker Compose.
 
-```bash
-docker-compose ps
-```
-## Passo 5: Inicialize o Terraform
+## Passo 5: Inicialize o Terraform para iniciar todos os contêineres Docker e conexões.
+
 No diretório do terraform, execute o seguinte comando para inicializar o Terraform:
 
 
@@ -130,7 +131,7 @@ localhost:5050 pgAdmin
 docker ps
 ```
 2.Copie o ID do contêiner do Banco de Dados PostgreSQL da lista resultante.
-3.xecute o comando docker inspect com o ID do contêiner copiado para obter informações detalhadas, incluindo o endereço IP do contêiner PostgreSQL:
+3.Execute o comando docker inspect com o ID do contêiner copiado para obter informações detalhadas, incluindo o endereço IPAddress do contêiner PostgreSQL:
 
 ```bash
 docker inspect <ID_do_Container>

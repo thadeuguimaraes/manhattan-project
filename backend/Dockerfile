@@ -7,6 +7,8 @@ WORKDIR /app
 # Copie o arquivo package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Instale as dependências da aplicação
 RUN npm install
 

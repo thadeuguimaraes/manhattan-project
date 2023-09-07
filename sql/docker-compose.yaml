@@ -13,7 +13,7 @@ services:
       - backend
 
   backend:
-    image: my-backend-app
+    image: my-backend-app:v1
     ports:
       - "3000:3000"
     environment:
