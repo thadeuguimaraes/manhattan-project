@@ -1,11 +1,12 @@
-# Aqui está um guia passo a passo para executar uma aplicação localmente com Docker, Terraform e acessar um banco de dados Postgres por meio do pgAdmin:
+# Aqui está um guia passo a passo para executar uma aplicação Nodejs localmente com Docker, Terraform e acessar um banco de dados Postgres por meio do pgAdmin:
 
-Este guia fornecerá instruções passo a passo sobre como configurar e executar uma aplicação local usando Docker e Terraform. Certifique-se de que você já tenha o Docker e o Terraform instalados em sua máquina.
+Este guia fornecerá instruções passo a passo sobre como configurar e executar uma aplicação Nodejs local usando Docker e Terraform. Certifique-se de que você já tenha o Docker e o Terraform instalados em sua máquina.
 
 ## Pré-requisitos
 
 Certifique-se de que você tenha os seguintes pré-requisitos instalados em sua máquina:
 
+- [Node.js](https://nodejs.org/en)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
@@ -19,7 +20,7 @@ git clone git@github.com:thadeuguimaraes/manhattan-project.git
 cd repositorio
 ```
 
-## Passo 2: Configure as Variáveis de Ambiente
+## Passo 2: Configure as Variáveis de Ambiente 
 Defina as variáveis de ambiente necessárias para a aplicação. Normalmente, essas variáveis são definidas em um arquivo `.env`, mas pode variar dependendo do projeto.
 
 ## Passo 3: Crie as Imagens Docker para as Aplicações

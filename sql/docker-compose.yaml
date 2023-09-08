@@ -1,31 +1,6 @@
 version: '3.8'
 
 services:
-  frontend:
-    container_name: frontend
-    build:
-      context: ./frontend
-    ports:
-      - "80:80"
-    networks:
-      - mynetwork  # Nome da rede
-    depends_on:
-      - backend
-
-  backend:
-    image: my-backend-app:v1
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PW}
-      - POSTGRES_DB=${POSTGRES_DB}
-    depends_on:
-      - postgres
-    networks:
-      - mynetwork 
-
   postgres:
     container_name: postgres
     image: postgres:15.4
@@ -38,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - mynetwork 
+      - mynetwork
 
   pgadmin:
     container_name: pgadmin
@@ -50,6 +25,8 @@ services:
       - ./index.json:/pgadmin4/package.json
     ports:
       - "5050:80"
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
