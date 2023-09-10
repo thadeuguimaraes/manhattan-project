@@ -8,7 +8,6 @@ Certifique-se de que você tenha os seguintes pré-requisitos instalados em sua 
 
 - [Node.js](https://nodejs.org/en)
 - [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
 - [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 
 ## Passo 1: Clone o Repositório
@@ -23,7 +22,7 @@ cd repositorio
 ## Passo 2: Configure as Variáveis de Ambiente 
 Defina as variáveis de ambiente necessárias para a aplicação. Normalmente, essas variáveis são definidas em um arquivo `.env`, mas pode variar dependendo do projeto.
 
-## Passo 3: Crie as Imagens Docker para as Aplicações
+## Passo 3: Crie as Imagens Docker para as Aplicações 
 
 Antes de executar suas aplicações, você precisa criar as imagens Docker para o frontend e o backend. Siga estas etapas para fazer isso:
 ### 3.1: Frontend
@@ -55,34 +54,6 @@ Isso criará uma imagem Docker chamada my-backend-app com a tag 1.0 para a aplic
 Agora que você criou as imagens Docker para ambas as aplicações, você pode prosseguir com os passos anteriores para executar seus contêineres usando o Docker Compose.
 
 Lembre-se de que esses comandos assumem que você tem um Dockerfile configurado corretamente em cada diretório de aplicação. Certifique-se de personalizar os nomes e tags das imagens conforme necessário para corresponder à sua configuração.
-
-Agora que você criou as imagens Docker para suas aplicações frontend e backend, você pode usar o Docker Compose para construir e iniciar os contêineres da aplicação completa. Siga estas etapas:
-
-### 4.1: Navegue até o diretório SQL
-
-Primeiro, navegue até o diretório SQL:
-```bash
-cd sql
-```
-Este diretório pode conter arquivos SQL ou scripts relevantes para o seu projeto.
-
-### 4.2: Execute o Docker Compose
-Agora, execute o Docker Compose a partir do diretório raiz do seu projeto onde está localizado o arquivo docker-compose.yml. Use o seguinte comando:
-
-```bash
-docker-compose up -d
-```
-Isso instruirá o Docker Compose a construir e iniciar os contêineres definidos no arquivo docker-compose.yml. O uso da opção -d faz com que os contêineres sejam executados em segundo plano.
-
-Aguarde até que todos os contêineres estejam prontos. Você pode verificar o status dos contêineres com o comando:
-```bash
-docker-compose ps
-```
-Uma vez que todos os contêineres estejam em execução, sua aplicação estará acessível localmente.
-
-Lembre-se de que é importante ter o Docker e o Docker Compose instalados no seu sistema antes de executar esses comandos.
-
-Agora você deve ter sua aplicação executando localmente com Docker e Docker Compose.
 
 ## Passo 5: Inicialize o Terraform para iniciar todos os contêineres Docker e conexões.
 
@@ -122,7 +93,6 @@ Abra um navegador da web e acesse sua aplicação através do endereço local ou
 
 localhost:8080 frontend
 localhost:3000 backend
-localhost:5432 postgres
 localhost:5050 pgAdmin
 
 ## Passo 7: Acesse o pgAdmin e o Banco de Dados PostgreSQL
