@@ -43,9 +43,8 @@ resource "docker_container" "postgres" {
 }
 
 resource "docker_container" "pgadmin4" {
-  name  = "pgadmin4"
-  image = var.pgadmin_image
-
+  name    = "pgadmin4"
+  image   = var.pgadmin_image
   restart = "always"
 
   ports {
@@ -64,9 +63,8 @@ resource "docker_container" "pgadmin4" {
 }
 
 resource "docker_container" "frontend" {
-  name  = "frontend"
-  image = var.frontend_image
-
+  name    = "frontend"
+  image   = var.frontend_image
   restart = "always"
 
   ports {
@@ -80,9 +78,8 @@ resource "docker_container" "frontend" {
 }
 
 resource "docker_container" "backend" {
-  name  = "backend"
-  image = var.backend_image
-
+  name    = "backend"
+  image   = var.backend_image
   restart = "always"
 
   ports {
@@ -94,3 +91,28 @@ resource "docker_container" "backend" {
     name = docker_network.mynetwork.name
   }
 }
+
+resource "null_resource" "initialize_database" {
+  provisioner "local-exec" {
+    command = <<EOT
+      until docker exec ${docker_container.postgres.name} pg_isready -h localhost -p 5432 -U ${var.POSTGRES_USER}; do
+        echo "Waiting for PostgreSQL to become available..."
+        sleep 2
+      done
+
+      docker exec -i ${docker_container.postgres.name} psql -U ${var.POSTGRES_USER} -d ${var.POSTGRES_DB} <<-EOSQL
+      CREATE TABLE IF NOT EXISTS "users" (
+          id SERIAL PRIMARY KEY,
+          username VARCHAR(50) NOT NULL,
+          password VARCHAR(255) NOT NULL,
+          role VARCHAR(20) NOT NULL
+      );
+
+      INSERT INTO "users" (username, password, role)
+      VALUES ('admin', 'secure_p4$$w0rd', 'admin');
+      EOSQL
+    EOT
+  }
+}
+
+

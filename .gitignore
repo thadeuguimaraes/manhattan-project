@@ -33,3 +33,6 @@ override.tf.json
 
 # Ignore node_modules directory
 node_modules/
+
+# Ignore variables.tf
+variables.tf
