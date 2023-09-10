@@ -128,9 +128,7 @@ Após criar a tabela usando o script SQL definido no arquivo `main.tf` do Terraf
 
 1. No painel de navegação à esquerda, expanda o servidor PostgreSQL que você acabou de adicionar.
 
-2. Clique com o botão direito em "Databases" e escolha o banco de dados que você deseja usar.
-
-3. Clique com o botão direito em "Query Tool" para abrir uma nova janela de consulta.
+2. Clique com o botão direito em "Servers(1)" e escolha o banco de dados que você deseja usar.
 
 4. Navegue até "Databases" => "postgres" => "Schemas" => "public" => "Tables" => "Users" => "Columns" e verifique se os itens da tabela foram criados corretamente.
 
