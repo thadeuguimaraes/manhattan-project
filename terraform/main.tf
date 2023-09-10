@@ -12,12 +12,60 @@ provider "docker" {
 }
 
 resource "docker_network" "mynetwork" {
-  name = "mynetwork"
+  name = var.network_name
+}
+
+resource "docker_container" "postgres" {
+  name  = "postgres"
+  image = var.postgres_image
+
+  restart = "always"
+
+  ports {
+    internal = 5431
+    external = 5432
+  }
+
+  env = [
+    "POSTGRES_USER=${var.POSTGRES_USER}",
+    "POSTGRES_PASSWORD=${var.POSTGRES_PW}",
+    "POSTGRES_DB=${var.POSTGRES_DB}",
+  ]
+
+  volumes {
+    host_path      = "/var/lib/postgresql/data"
+    container_path = "/docker-entrypoint-initdb.d"
+  }
+
+  networks_advanced {
+    name = docker_network.mynetwork.name
+  }
+}
+
+resource "docker_container" "pgadmin4" {
+  name  = "pgadmin4"
+  image = var.pgadmin_image
+
+  restart = "always"
+
+  ports {
+    internal = 80
+    external = 5050
+  }
+
+  env = [
+    "PGADMIN_DEFAULT_EMAIL=${var.PGADMIN_MAIL}",
+    "PGADMIN_DEFAULT_PASSWORD=${var.PGADMIN_PW}",
+  ]
+
+  networks_advanced {
+    name = docker_network.mynetwork.name
+  }
 }
 
 resource "docker_container" "frontend" {
   name  = "frontend"
-  image = "my-frontend-app:v1"
+  image = var.frontend_image
 
   restart = "always"
 
@@ -33,7 +81,7 @@ resource "docker_container" "frontend" {
 
 resource "docker_container" "backend" {
   name  = "backend"
-  image = "my-backend-app:v1"
+  image = var.backend_image
 
   restart = "always"
 
