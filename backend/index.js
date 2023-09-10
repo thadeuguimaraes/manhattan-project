@@ -12,9 +12,9 @@ const db_port = process.env.POSTGRES_PORT || '5432';
 const db_name = process.env.POSTGRES_DB;
 
 const client = new PG.Client({
-  user: user,
+  user,
   password: pass,
-  host: host,
+  host,
   port: db_port,
   database: db_name,
 });

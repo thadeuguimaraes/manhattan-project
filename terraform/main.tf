@@ -22,8 +22,8 @@ resource "docker_container" "postgres" {
   restart = "always"
 
   ports {
-    internal = 5431
-    external = 5432
+    internal = var.postgres_internal_port
+    external = var.postgres_external_port
   }
 
   env = [
@@ -49,8 +49,8 @@ resource "docker_container" "pgadmin4" {
   restart = "always"
 
   ports {
-    internal = 80
-    external = 5050
+    internal = var.pgadmin_internal_port
+    external = var.pgadmin_external_port
   }
 
   env = [
@@ -70,8 +70,8 @@ resource "docker_container" "frontend" {
   restart = "always"
 
   ports {
-    internal = 80
-    external = 8080
+    internal = var.frontend_internal_port
+    external = var.frontend_external_port
   }
 
   networks_advanced {
@@ -86,8 +86,8 @@ resource "docker_container" "backend" {
   restart = "always"
 
   ports {
-    internal = 3000
-    external = 3000
+    internal = var.backend_internal_port
+    external = var.backend_external_port
   }
 
   networks_advanced {
