@@ -122,16 +122,19 @@ docker inspect <ID_do_Container>
 
 Isso permitirá que você acesse o pgAdmin e se conecte ao Banco de Dados PostgreSQL localmente. Certifique-se de inserir as informações corretas para evitar problemas de conexão.
 
-## Passo 8: Execute o script SQL
+## Passo 8: Verificando a Tabela Criada com o Terraform
 
-1.No painel de navegação à esquerda, expanda o servidor PostgreSQL que você acabou de adicionar.
-2.Clique com o botão direito em "Databases" e escolha o banco de dados que você deseja usar.
-3.Clique com o botão direito em "Query Tool" para abrir uma nova janela de consulta.
-4.No editor de consulta, cole o conteúdo do seu script SQL funcional que você deseja executar.
-5.Clique no botão "Execute" (seta verde) ou pressione `F5` para executar o script SQL.
-6.Clique com o botão direito no ícone do banco de dados e selecione   "Refresh" para atualizar a visualização.
-- Navegue até "Databases" => "postgres" => "Schemas" => "public" => "Tables" => "Users" => "Columns" e confira se os itens da tabela foram criados corretamente.
-- Clique com o botão direito em "Users" e selecione a opção "View/Edit Data" para visualizar os dados da tabela. Escolha a forma como você gostaria de visualizar a tabela, por exemplo, "View Data" ou "Edit Data" para realizar operações de visualização ou edição dos dados.
+Após criar a tabela usando o script SQL definido no arquivo `main.tf` do Terraform, siga estas etapas para verificar se a tabela foi criada corretamente e visualizar os dados:
+
+1. No painel de navegação à esquerda, expanda o servidor PostgreSQL que você acabou de adicionar.
+
+2. Clique com o botão direito em "Databases" e escolha o banco de dados que você deseja usar.
+
+3. Clique com o botão direito em "Query Tool" para abrir uma nova janela de consulta.
+
+4. Navegue até "Databases" => "postgres" => "Schemas" => "public" => "Tables" => "Users" => "Columns" e verifique se os itens da tabela foram criados corretamente.
+
+5. Clique com o botão direito em "Users" e selecione a opção "View/Edit Data" para visualizar os dados da tabela. Escolha a forma como você gostaria de visualizar a tabela, por exemplo, "View Data" ou "Edit Data" => All Rows, para realizar operações de visualização ou edição dos dados.
 
 ## Passo 9: Limpando Toda a Infraestrutura do Terraform e Docker
 
