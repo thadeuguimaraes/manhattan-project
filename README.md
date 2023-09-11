@@ -145,13 +145,7 @@ terraform destroy
 4.Aguarde enquanto o Terraform remove todos os recursos. Isso pode levar algum tempo, dependendo da complexidade da infraestrutura.
 
 ### No Docker:
-1.Abra um terminal e navegue até o diretório raiz do seu projeto, onde você possui seu arquivo docker-compose.yml.
-2.Execute o seguinte comando para parar e remover todos os contêineres Docker em execução:
-```bash
-docker-compose down
-```
-3.Isso encerrará todos os contêineres relacionados ao seu projeto.
-4.Para remover todas as imagens Docker que foram criadas para o seu projeto, você pode executar o seguinte comando:
+1.Abra um terminal e navegue até o diretório raiz do seu projeto, onde você possui seu o arquivo Dockerfile.
 ```bash
 docker rmi -f $(docker images -a -q)
 ```
