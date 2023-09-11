@@ -55,70 +55,69 @@ Agora que você criou as imagens Docker para ambas as aplicações, você pode p
 
 Lembre-se de que esses comandos assumem que você tem um Dockerfile configurado corretamente em cada diretório de aplicação. Certifique-se de personalizar os nomes e tags das imagens conforme necessário para corresponder à sua configuração.
 
-## Passo 5: Inicialize o Terraform para iniciar todos os contêineres Docker e conexões.
+## Passo 4: Inicialize o Terraform para iniciar todos os contêineres Docker e conexões.
 
 No diretório do terraform, execute o seguinte comando para inicializar o Terraform:
 
 
+4.1
 ```bash
 terraform init
 ```
 Isso instalará quaisquer provedores ou módulos necessários para sua infraestrutura.
 
+4.2
 ```bash
 terraform fmt
 ```
 O comando terraform fmt é usado para formatar (indentar e organizar) os arquivos de configuração do Terraform.
 Isso ajuda a manter um estilo de código consistente em toda a equipe e torna os arquivos mais legíveis.
 
+4.3
 ```bash
 terraform validate
 ```
 O comando terraform validate verifica a sintaxe e a semântica dos arquivos de configuração do Terraform.
 Ele identifica erros comuns antes de aplicar qualquer alteração, economizando tempo e evitando problemas futuros.
 
+4.4
 ```bash
 terraform plan
 ```
 Execute um plano do Terraform para verificar as alterações propostas em sua infraestrutura:Revise cuidadosamente o plano e verifique se ele reflete as alterações desejadas.
 Quando estiver satisfeito com o plano, aplique as alterações à sua infraestrutura:
 
+4.5
 ```bash
 terraform apply
 ```
 Confirme a aplicação digitando "yes" quando solicitado.
+Esse comando também irá criar um arquivo chamado "ip_output.txt" contendo o endereço IP do container PostgreSQL. Iremos usar esse IP para configurar o "Register Server" no campo "Host name/address" do banco de dados.
 
-## Passo 6: Acesse sua Aplicação
+## Passo 5: Acesse sua Aplicação
 Abra um navegador da web e acesse sua aplicação através do endereço local ou do IP fornecido pelo Terraform.
 
 localhost:8080 frontend
 localhost:3000 backend
 localhost:5050 pgAdmin
 
-## Passo 7: Acesse o pgAdmin e o Banco de Dados PostgreSQL
+## Passo 6: Acesse o pgAdmin e o Banco de Dados PostgreSQL
 1.Liste os contêineres em execução usando o seguinte comando Docker:
 
 ```bash
 docker ps
 ```
-2.Copie o ID do contêiner do Banco de Dados PostgreSQL da lista resultante.
-3.Execute o comando docker inspect com o ID do contêiner copiado para obter informações detalhadas, incluindo o endereço IPAddress do contêiner PostgreSQL:
-
-```bash
-docker inspect <ID_do_Container>
-```
-4.Anote o endereço IP que você encontrou no passo anterior, pois será usado para a conexão com o banco de dados.
-5.Abra o pgAdmin no seu navegador da web e faça login com as credenciais fornecidas.
-6.No painel do pgAdmin, clique em "Add New Server" para configurar a conexão com o PostgreSQL.
-7.Na aba "General", forneça um nome para o servidor (pode ser qualquer nome descritivo).
-8.Na aba "Connection", preencha as seguintes informações:
-- Em "Host name/address", insira o endereço IP do contêiner PostgreSQL que você anotou no passo 4.
+1. Abra o pgAdmin no seu navegador da web e faça login com as credenciais fornecidas.
+2. No painel do pgAdmin, clique em "Add New Server" para configurar a conexão com o PostgreSQL.
+3. Na aba "General", forneça um nome para o servidor (pode ser qualquer nome descritivo).
+4. Na aba "Connection", preencha as seguintes informações:
+- Em "Host name/address", insira o endereço IP do contêiner PostgreSQL que você anotou no passo `4.5`.
 - Certifique-se de que o campo "Port" esteja configurado para 5432 (a porta padrão do PostgreSQL).
 - Em "Maintenence database", insira o nome do banco de dados que você configurou nas variáveis de ambiente ou no Docker Compose. Certifique-se de que corresponda ao nome do banco de dados que você deseja acessar.
 - Em "Username", insira seu nome de usuário PostgreSQL.
 - Em "Password", insira sua senha PostgreSQL.
-9.Clique em "Save" para salvar as configurações do servidor.
-10.Agora, você pode clicar no servidor recém-configurado no painel do pgAdmin e estabelecer uma conexão com o Banco de Dados PostgreSQL. Certifique-se de que as informações fornecidas correspondam às configurações do seu ambiente local.
+5. Clique em "Save" para salvar as configurações do servidor.
+6. Agora, você pode clicar no servidor recém-configurado no painel do pgAdmin e estabelecer uma conexão com o Banco de Dados PostgreSQL. Certifique-se de que as informações fornecidas correspondam às configurações do seu ambiente local.
 
 Isso permitirá que você acesse o pgAdmin e se conecte ao Banco de Dados PostgreSQL localmente. Certifique-se de inserir as informações corretas para evitar problemas de conexão.
 

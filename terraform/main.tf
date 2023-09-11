@@ -100,19 +100,22 @@ resource "null_resource" "initialize_database" {
         sleep 2
       done
 
-      docker exec -i ${docker_container.postgres.name} psql -U ${var.POSTGRES_USER} -d ${var.POSTGRES_DB} <<-EOSQL
-      CREATE TABLE IF NOT EXISTS "users" (
-          id SERIAL PRIMARY KEY,
-          username VARCHAR(50) NOT NULL,
-          password VARCHAR(255) NOT NULL,
-          role VARCHAR(20) NOT NULL
-      );
-
-      INSERT INTO "users" (username, password, role)
-      VALUES ('admin', 'secure_p4$$w0rd', 'admin');
-      EOSQL
+      docker exec -i ${docker_container.postgres.name} psql -U ${var.POSTGRES_USER} -d ${var.POSTGRES_DB} -c "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(50) NOT NULL, password VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL);"
+      docker exec -i ${docker_container.postgres.name} psql -U ${var.POSTGRES_USER} -d ${var.POSTGRES_DB} -c "INSERT INTO users (username, password, role) VALUES ('admin', 'secure_p4$$w0rd', 'admin');"
     EOT
   }
 }
 
+resource "null_resource" "inspect_postgres_container" {
+  triggers = {
+    container_id = docker_container.postgres.id
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      container_ip=$(docker inspect -f '{{.NetworkSettings.Networks.mynetwork.IPAddress}}' postgres)
+      echo "$container_ip" > "${path.module}/ip_output.txt"
+    EOT
+  }
+}
 
