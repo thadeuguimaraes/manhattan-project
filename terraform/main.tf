@@ -118,4 +118,3 @@ resource "null_resource" "inspect_postgres_container" {
     EOT
   }
 }
-

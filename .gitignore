@@ -35,4 +35,4 @@ override.tf.json
 node_modules/
 
 # Ignore variables.tf
-variables.tf
+#variables.tf
